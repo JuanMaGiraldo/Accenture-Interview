@@ -1,5 +1,6 @@
 package com.accenture.interview.exceptions;
 
+@SuppressWarnings("serial")
 public class PurchaseNotFoundException extends BaseException {
 
 	private String errorCode;

@@ -1,12 +1,9 @@
 package com.accenture.interview.entities;
 
 import java.math.BigDecimal;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Table
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Purchase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,7 @@ public class Purchase {
 	private BigDecimal deliveryPrice;
 
 	private BigDecimal fullPayment;
-	
+
 	private boolean purchaseActive;
 
 	@ManyToMany(fetch = FetchType.LAZY)

@@ -1,5 +1,6 @@
 package com.accenture.interview.exceptions;
 
+@SuppressWarnings("serial")
 public class TimeLimitExpiredException extends BaseException {
 
 	private String errorCode;

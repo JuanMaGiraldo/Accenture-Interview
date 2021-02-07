@@ -18,7 +18,7 @@ public class SystemProperties {
 
 	@Value("${DELIVERY_PRICE}")
 	private BigDecimal deliveryPrice;
-	
+
 	@Value("${IVA_PERCENTAGE}")
 	private BigDecimal ivaPercentage;
 
@@ -54,5 +54,4 @@ public class SystemProperties {
 		this.ivaPercentage = ivaPercentage;
 	}
 
-	
 }

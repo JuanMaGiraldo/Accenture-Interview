@@ -47,24 +47,12 @@ public class PurchaseService implements IPurchaseService {
 
 		List<Product> listProducts = getProducts(productsId);
 
-		Purchase purchase = new Purchase();
-		purchase.setClient(clientOptional.get());
-		purchase.setProducts(listProducts);
-		purchase.setPenalty(new BigDecimal(0));
-		purchase.setPurchaseActive(true);
+		Purchase purchase = initializePurchase(clientOptional.get(), listProducts);
 		calculatePrices(purchase);
 
 		purchaseRepository.save(purchase);
 	}
 
-	/**
-	 * 
-	 * Method in charge of updating an order. If no more than 5 hours have passed
-	 * from the moment of creating the product and the new total cost is higher than
-	 * the previous one, then the purchase can be updated.
-	 * 
-	 * @param purchaseId
-	 */
 	@Override
 	public void updatePurchase(Long purchaseId, List<Long> newProductsId) {
 
@@ -98,15 +86,6 @@ public class PurchaseService implements IPurchaseService {
 		purchaseRepository.save(purchase);
 	}
 
-	/**
-	 * 
-	 * Method in charge of updating an order. If no more than 5 hours have passed
-	 * from the moment of creating the product and the new total cost is higher than
-	 * the previous one, then the purchase can be
-	 * updated.loadInitInfoFromUserPosition
-	 * 
-	 * @param purchaseId
-	 */
 	@Override
 	public void deletePurchase(Long purchaseId) {
 
@@ -194,6 +173,7 @@ public class PurchaseService implements IPurchaseService {
 	private void calculateTotal(Purchase purchase) {
 		BigDecimal ivaMultiplier = new BigDecimal(100).add(systemProperties.getIvaPercentage())
 				.divide(new BigDecimal(100));
+		
 		BigDecimal fullPayment = (purchase.getProductsPrice().multiply(ivaMultiplier).add(purchase.getDeliveryPrice()));
 		purchase.setFullPayment(fullPayment);
 	}
@@ -219,5 +199,14 @@ public class PurchaseService implements IPurchaseService {
 		long diffInMillies = Math.abs(actualDate.getTime() - purchase.getCreationDate().getTime());
 		long secsDiff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 		return secsDiff;
+	}
+
+	public Purchase initializePurchase(Client client, List<Product> listProducts) {
+		Purchase purchase = new Purchase();
+		purchase.setClient(client);
+		purchase.setProducts(listProducts);
+		purchase.setPenalty(new BigDecimal(0));
+		purchase.setPurchaseActive(true);
+		return purchase;
 	}
 }

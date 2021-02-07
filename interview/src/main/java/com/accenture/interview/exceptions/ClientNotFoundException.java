@@ -1,11 +1,8 @@
 package com.accenture.interview.exceptions;
 
+@SuppressWarnings("serial")
 public class ClientNotFoundException extends BaseException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1162547623215166770L;
 	private String errorCode;
 
 	public ClientNotFoundException() {

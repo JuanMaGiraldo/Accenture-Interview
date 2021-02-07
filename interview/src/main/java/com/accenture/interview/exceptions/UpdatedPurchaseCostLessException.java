@@ -1,5 +1,6 @@
 package com.accenture.interview.exceptions;
 
+@SuppressWarnings("serial")
 public class UpdatedPurchaseCostLessException extends BaseException {
 
 	private String errorCode;

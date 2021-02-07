@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.interview.exceptions.BaseException;
-import com.accenture.interview.exceptions.ClientNotFoundException;
 import com.accenture.interview.purchase.IPurchaseService;
 
 @RestController
